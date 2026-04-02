@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collaborative Document Workspace</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>Collab Docs</h1>
+          <p>Lightweight shared workspace</p>
+        </div>
+
+        <div class="panel">
+          <label for="userSelect" class="label">Active User</label>
+          <select id="userSelect" class="select"></select>
+        </div>
+
+        <div class="panel">
+          <button id="newDocBtn" class="btn btn-primary">+ New Document</button>
+        </div>
+
+        <div class="panel">
+          <label class="label">Import File</label>
+          <p class="muted">Supported: .txt, .md</p>
+          <input id="fileInput" type="file" accept=".txt,.md" class="input-file" />
+          <button id="uploadBtn" class="btn btn-secondary">Upload as Document</button>
+          <p class="muted">This MVP supports .txt and .md imports only. Changes are saved manually.</p>
+        </div>
+
+        <div class="panel doc-section">
+          <div class="section-header">
+            <h2>Owned</h2>
+          </div>
+          <ul id="ownedDocsList" class="doc-list"></ul>
+        </div>
+
+        <div class="panel doc-section">
+          <div class="section-header">
+            <h2>Shared With Me</h2>
+          </div>
+          <ul id="sharedDocsList" class="doc-list"></ul>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div class="title-wrap">
+            <input
+              id="docTitle"
+              class="doc-title-input"
+              type="text"
+              placeholder="Untitled Document"
+              disabled
+            />
+            <span id="docMeta" class="meta"></span>
+          </div>
+
+          <div class="actions">
+            <button id="shareBtn" class="btn btn-secondary" disabled>Share</button>
+            <button id="saveBtn" class="btn btn-primary" disabled>Save</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <button class="tool-btn" data-cmd="bold"><b>B</b></button>
+          <button class="tool-btn" data-cmd="italic"><i>I</i></button>
+          <button class="tool-btn" data-cmd="underline"><u>U</u></button>
+          <button class="tool-btn" data-cmd="formatBlock" data-value="H1">H1</button>
+          <button class="tool-btn" data-cmd="formatBlock" data-value="H2">H2</button>
+          <button class="tool-btn" data-cmd="insertUnorderedList">• List</button>
+          <button class="tool-btn" data-cmd="insertOrderedList">1. List</button>
+          <button class="tool-btn" data-cmd="removeFormat">Clear</button>
+        </div>
+
+        <div class="editor-wrap">
+          <div
+            id="editor"
+            class="editor"
+            contenteditable="false"
+            spellcheck="true"
+            data-placeholder="Start writing your document here..."
+          ></div>
+        </div>
+      </main>
+    </div>
+
+    <div id="shareModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Share Document</h3>
+          <button id="closeShareModalBtn" class="icon-btn">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <label for="shareUserSelect" class="label">Grant access to</label>
+          <select id="shareUserSelect" class="select"></select>
+          <p class="muted">Only the owner can share a document.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button id="confirmShareBtn" class="btn btn-primary">Share</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
